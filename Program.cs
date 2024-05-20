@@ -1,9 +1,6 @@
 ﻿using Game.Implementations;
-using Game.Support;
 
+var myGame = new RandomNumberGame();
 
-var settings = new Settings(10, new NumberRange(10, 20));
-
-var myGame = new RandomNumberGame(settings);
-
+myGame.Init();
 myGame.Start();

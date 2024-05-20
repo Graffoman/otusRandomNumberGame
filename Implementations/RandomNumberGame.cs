@@ -1,12 +1,29 @@
 ﻿using Game.Interfaces;
 using Game.Support;
+using System.Text.Json;
 
 namespace Game.Implementations
 {
-    public class RandomNumberGame(ISettings settings) : IGame
+    public class RandomNumberGame() : IGame
     {
-        public ISettings GameSettings => settings;
+        public ISettings GameSettings;
         private UserInteractions userInteractions => new UserInteractions(GameSettings);
+
+        public void Init()
+        {
+            try
+            {
+                var jsonSettings = File.ReadAllText("Settings.json");
+
+                GameSettings = JsonSerializer.Deserialize<Settings>(jsonSettings);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Console.WriteLine("Default setting applied");
+                GameSettings = new Settings(10, new NumberRange(10, 20));
+            }
+        }
 
         public void Start()
         {

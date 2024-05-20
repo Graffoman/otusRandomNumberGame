@@ -2,7 +2,7 @@
 {
     public interface IGame
     {
-        ISettings GameSettings { get; }
+        void Init();
         void Start();
         void Stop();
     }
